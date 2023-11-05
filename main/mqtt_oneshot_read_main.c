@@ -167,6 +167,17 @@ void app_main(void)
         if (do_calibration1_chan0) {
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0], &voltage[0]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage[0]);
+
+            char chanNum_char[ 32 ] = ADC_UNIT_1 + 1;
+            char data_char[ 32 ] = voltage[0];
+            // as per comment from LS_dev, platform is int 16bits
+            sprintf(chanNum_char,"%lu", chan_num);
+            sprintf(data_char,"%lu", data);
+            char topic[50]; 
+            strcpy(topic, "SOIL/MOISTURE/");
+            strcat(topic, chanNum_char);
+            msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
+
         }
         vTaskDelay(pdMS_TO_TICKS(1000));
 
@@ -175,6 +186,16 @@ void app_main(void)
         if (do_calibration1_chan1) {
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan1_handle, adc_raw[1], &voltage[1]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN1, voltage[1]);
+            char chanNum_char[ 32 ] = ADC_UNIT_3 + 1;
+            char data_char[ 32 ] = voltage[0];
+            // as per comment from LS_dev, platform is int 16bits
+            sprintf(chanNum_char,"%lu", chan_num);
+            sprintf(data_char,"%lu", data);
+            char topic[50]; 
+            strcpy(topic, "SOIL/MOISTURE/");
+            strcat(topic, chanNum_char);
+            msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
+
         }
         vTaskDelay(pdMS_TO_TICKS(1000));
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN2, &adc_raw[2]));
@@ -182,6 +203,16 @@ void app_main(void)
         if (do_calibration1_chan1) {
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan1_handle, adc_raw[2], &voltage[2]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN2, voltage[2]);
+            char chanNum_char[ 32 ] = ADC_UNIT_6 + 1;
+            char data_char[ 32 ] = voltage[0];
+            // as per comment from LS_dev, platform is int 16bits
+            sprintf(chanNum_char,"%lu", chan_num);
+            sprintf(data_char,"%lu", data);
+            char topic[50]; 
+            strcpy(topic, "SOIL/MOISTURE/");
+            strcat(topic, chanNum_char);
+            msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
+
         }
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
