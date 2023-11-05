@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/root/projects/esp/oneshot_read/build/CMakeFiles/bootloader
-/root/projects/esp/oneshot_read/build/CMakeFiles/bootloader.rule
-/root/projects/esp/oneshot_read/build/CMakeFiles/bootloader-complete.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/root/projects/esp/oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/root/projects/esp/mqtt_oneshot_read/build/CMakeFiles/bootloader
+/root/projects/esp/mqtt_oneshot_read/build/CMakeFiles/bootloader.rule
+/root/projects/esp/mqtt_oneshot_read/build/CMakeFiles/bootloader-complete.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/root/projects/esp/mqtt_oneshot_read/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

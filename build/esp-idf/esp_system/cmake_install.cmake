@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/root/projects/esp/oneshot_read/build/esp-idf/esp_system/port/cmake_install.cmake")
+  include("/root/projects/esp/mqtt_oneshot_read/build/esp-idf/esp_system/port/cmake_install.cmake")
 endif()
 

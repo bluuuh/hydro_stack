@@ -1,4 +1,4 @@
-/* * Data converted from /root/projects/esp/oneshot_read/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /root/projects/esp/mqtt_oneshot_read/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

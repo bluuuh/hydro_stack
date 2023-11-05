@@ -38,6 +38,8 @@ const static char *TAG = "MQTT_ADC_ONESHOT";
 #define EXAMPLE_ADC1_CHAN0          ADC_CHANNEL_0
 #define EXAMPLE_ADC1_CHAN1          ADC_CHANNEL_3
 #define EXAMPLE_ADC1_CHAN2          ADC_CHANNEL_6
+#define EXAMPLE_ADC1_CHAN3          ADC_CHANNEL_5
+#define EXAMPLE_ADC1_CHAN4          ADC_CHANNEL_4
 
 
 #define EXAMPLE_ADC_ATTEN           ADC_ATTEN_DB_11
@@ -152,14 +154,21 @@ void app_main(void)
     };
     ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, EXAMPLE_ADC1_CHAN0, &config));
     ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, EXAMPLE_ADC1_CHAN1, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, EXAMPLE_ADC1_CHAN2, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, EXAMPLE_ADC1_CHAN3, &config));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, EXAMPLE_ADC1_CHAN4, &config));
 
     //-------------ADC1 Calibration Init---------------//
     adc_cali_handle_t adc1_cali_chan0_handle = NULL;
     adc_cali_handle_t adc1_cali_chan1_handle = NULL;
     adc_cali_handle_t adc1_cali_chan2_handle = NULL;
+    adc_cali_handle_t adc1_cali_chan3_handle = NULL;
+    adc_cali_handle_t adc1_cali_chan4_handle = NULL;
     bool do_calibration1_chan0 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN0, EXAMPLE_ADC_ATTEN, &adc1_cali_chan0_handle);
     bool do_calibration1_chan1 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN1, EXAMPLE_ADC_ATTEN, &adc1_cali_chan1_handle);
     bool do_calibration1_chan2 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN2, EXAMPLE_ADC_ATTEN, &adc1_cali_chan2_handle);
+    bool do_calibration1_chan3 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN3, EXAMPLE_ADC_ATTEN, &adc1_cali_chan3_handle);
+    bool do_calibration1_chan4 = example_adc_calibration_init(ADC_UNIT_1, EXAMPLE_ADC1_CHAN4, EXAMPLE_ADC_ATTEN, &adc1_cali_chan4_handle);
 
     while (1) {
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN0, &adc_raw[0]));
@@ -168,53 +177,90 @@ void app_main(void)
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw[0], &voltage[0]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage[0]);
 
-            char chanNum_char[ 32 ] = ADC_UNIT_1 + 1;
-            char data_char[ 32 ] = voltage[0];
+            char chanNum_char[ 32 ];
+            char data_char[ 32 ];
             // as per comment from LS_dev, platform is int 16bits
-            sprintf(chanNum_char,"%lu", chan_num);
-            sprintf(data_char,"%lu", data);
+            sprintf(chanNum_char,"%i", 0);
+            sprintf(data_char,"%i", voltage[0]);
             char topic[50]; 
             strcpy(topic, "SOIL/MOISTURE/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(100));
 
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN1, &adc_raw[1]));
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN1, adc_raw[1]);
         if (do_calibration1_chan1) {
             ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan1_handle, adc_raw[1], &voltage[1]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN1, voltage[1]);
-            char chanNum_char[ 32 ] = ADC_UNIT_3 + 1;
-            char data_char[ 32 ] = voltage[0];
+            char chanNum_char[ 32 ];
+            char data_char[ 32 ];
             // as per comment from LS_dev, platform is int 16bits
-            sprintf(chanNum_char,"%lu", chan_num);
-            sprintf(data_char,"%lu", data);
+            sprintf(chanNum_char,"%i", 1);
+            sprintf(data_char,"%i", voltage[1]);
             char topic[50]; 
             strcpy(topic, "SOIL/MOISTURE/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(100));
+
         ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN2, &adc_raw[2]));
         ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN2, adc_raw[2]);
-        if (do_calibration1_chan1) {
-            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan1_handle, adc_raw[2], &voltage[2]));
+        if (do_calibration1_chan2) {
+            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan2_handle, adc_raw[2], &voltage[2]));
             ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN2, voltage[2]);
-            char chanNum_char[ 32 ] = ADC_UNIT_6 + 1;
-            char data_char[ 32 ] = voltage[0];
+            char chanNum_char[ 32 ];
+            char data_char[ 32 ];
             // as per comment from LS_dev, platform is int 16bits
-            sprintf(chanNum_char,"%lu", chan_num);
-            sprintf(data_char,"%lu", data);
+            sprintf(chanNum_char,"%i", 2);
+            sprintf(data_char,"%i", voltage[2]);
             char topic[50]; 
             strcpy(topic, "SOIL/MOISTURE/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(100));
+
+        ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN3, &adc_raw[3]));
+        ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN3, adc_raw[3]);
+        if (do_calibration1_chan3) {
+            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan3_handle, adc_raw[3], &voltage[3]));
+            ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN3, voltage[3]);
+            char chanNum_char[ 32 ];
+            char data_char[ 32 ];
+            // as per comment from LS_dev, platform is int 16bits
+            sprintf(chanNum_char,"%i", 3);
+            sprintf(data_char,"%i", voltage[3]);
+            char topic[50]; 
+            strcpy(topic, "SOIL/MOISTURE/");
+            strcat(topic, chanNum_char);
+            msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
+
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
+
+        ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN4, &adc_raw[4]));
+        ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN4, adc_raw[4]);
+        if (do_calibration1_chan4) {
+            ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan4_handle, adc_raw[4], &voltage[4]));
+            ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN4, voltage[4]);
+            char chanNum_char[ 32 ];
+            char data_char[ 32 ];
+            // as per comment from LS_dev, platform is int 16bits
+            sprintf(chanNum_char,"%i", 4);
+            sprintf(data_char,"%i", voltage[4]);
+            char topic[50]; 
+            strcpy(topic, "SOIL/MOISTURE/");
+            strcat(topic, chanNum_char);
+            msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
+
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     //Tear Down

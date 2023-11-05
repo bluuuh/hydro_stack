@@ -1,4 +1,4 @@
-# Install script for directory: /root/projects/esp/oneshot_read/main
+# Install script for directory: /root/projects/esp/mqtt_oneshot_read/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
