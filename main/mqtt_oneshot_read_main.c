@@ -183,7 +183,7 @@ void app_main(void)
             sprintf(chanNum_char,"%i", 0);
             sprintf(data_char,"%i", voltage[0]);
             char topic[50]; 
-            strcpy(topic, "SOIL/MOISTURE/");
+            strcpy(topic, "SOIL/MOISTURE1/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
@@ -201,7 +201,7 @@ void app_main(void)
             sprintf(chanNum_char,"%i", 1);
             sprintf(data_char,"%i", voltage[1]);
             char topic[50]; 
-            strcpy(topic, "SOIL/MOISTURE/");
+            strcpy(topic, "SOIL/MOISTURE1/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
@@ -219,7 +219,7 @@ void app_main(void)
             sprintf(chanNum_char,"%i", 2);
             sprintf(data_char,"%i", voltage[2]);
             char topic[50]; 
-            strcpy(topic, "SOIL/MOISTURE/");
+            strcpy(topic, "SOIL/MOISTURE1/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
@@ -237,7 +237,7 @@ void app_main(void)
             sprintf(chanNum_char,"%i", 3);
             sprintf(data_char,"%i", voltage[3]);
             char topic[50]; 
-            strcpy(topic, "SOIL/MOISTURE/");
+            strcpy(topic, "SOIL/MOISTURE1/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 
@@ -255,7 +255,7 @@ void app_main(void)
             sprintf(chanNum_char,"%i", 4);
             sprintf(data_char,"%i", voltage[4]);
             char topic[50]; 
-            strcpy(topic, "SOIL/MOISTURE/");
+            strcpy(topic, "SOIL/MOISTURE1/");
             strcat(topic, chanNum_char);
             msg_id = esp_mqtt_client_publish(client, topic, data_char, 0, 0, 0);
 

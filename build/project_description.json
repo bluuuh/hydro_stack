@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "continuous_read",
-    "project_version":    "9a0470a-dirty",
+    "project_version":    "9fc928d-dirty",
     "project_path":       "/root/projects/esp/mqtt_oneshot_read",
     "idf_path":           "/root/esp/esp-idf",
     "build_dir":          "/root/projects/esp/mqtt_oneshot_read/build",
