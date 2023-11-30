@@ -6,7 +6,7 @@ attach usb after you have WSL 2 running (Ubuntu 20.04 used)
 ```
 usbipd wsl list
 
-uspipd wsl attach -busid [BUS ID] 
+usbipd wsl attach -busid [BUS ID] 
 ```
 
 # ADC Single Read Example
